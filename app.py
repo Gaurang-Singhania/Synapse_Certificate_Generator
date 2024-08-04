@@ -52,7 +52,7 @@ st.markdown("""
 @st.cache_data
 def load_data():
     data = pd.read_csv("WSAttendance.csv")
-    data = data[(data["DAY 1"] == True) | (data["DAY 2"] == True)]
+    data = data[(data["Day-1"] == True) | (data["Day-2"] == True)]
     return data
 
 
@@ -73,7 +73,7 @@ def overlay_name_on_template(template_img, name):
     text_height = text_bbox[3] - text_bbox[1]
     img_width, img_height = img.size
     x = (img_width - text_width) / 2
-    y = (img_height - text_height) / 2
+    y = (img_height - text_height) / (2.15)
     draw.text((x, y), name, fill=(0, 93, 143), font=font, stroke_width=2, stroke_fill=(0, 0, 255))  # Adjust text color
     return img
 
@@ -103,11 +103,11 @@ def main():
     st.write("Please input your name in the above field. Thank you!")
     if st.button("Enter Name"):
         with st.spinner("Loading...."):
-            if user_input in data["Full Name"].str.title().values:
-                selected_row = data[data["Full Name"].str.title() == user_input].iloc[0]
-                name = selected_row["Full Name"].title()
-                attendance_day1 = selected_row["DAY 1"]  # Day 1 attendance Boolean
-                attendance_day2 = selected_row["DAY 2"]  # Day 2 attendance Boolean
+            if user_input in data["Name"].str.title().values:
+                selected_row = data[data["Name"].str.title() == user_input].iloc[0]
+                name = selected_row["Name"].title()
+                attendance_day1 = selected_row["Day-1"]  # Day 1 attendance Boolean
+                attendance_day2 = selected_row["Day-2"]  # Day 2 attendance Boolean
 
                 if attendance_day1 and attendance_day2:
                     img_with_overlay = overlay_name_on_template(template12, name)
@@ -126,7 +126,7 @@ def main():
                 if st.download_button(
                     "Download Certificate",
                     download_buf.getvalue(),
-                    file_name=f"{selected_row['Full Name']}_Synapse_WS24.png",
+                    file_name=f"{selected_row['Name']}_Synapse_WS24.png",
                 ):
                     st.success("Certificate downloaded!")
                 st.toast("Certificate Succesfully Generated 🥳🎉")
