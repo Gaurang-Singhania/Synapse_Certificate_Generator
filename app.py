@@ -46,6 +46,11 @@ st.markdown("""
         margin-top: 10px;
         text-align: center;
     }
+    @media only screen and (max-width: 640px) {
+        .custom-image {
+            display: none; 
+        }
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -87,7 +92,7 @@ def image_to_base64(image):
 def main():
     col1, col2 = st.columns([1, 4])
     with col2:
-        st.markdown('<div class="custom-title">Synapse Seminar 2024 Certificate</div>', unsafe_allow_html=True)
+        st.markdown('<div class="custom-title">Synapse ML-Workshop 2024 Certificate</div>', unsafe_allow_html=True)
     with col1:
         st.markdown(
             '<div class="custom-image"><img src="data:image/png;base64,{0}" width="125" /></div>'.format(
@@ -96,7 +101,7 @@ def main():
             unsafe_allow_html=True
         )
     st.markdown(
-        '<div class="custom-text">This tool will verify your participation in the Synapse Seminar 2024 and automatically generate a personalized certificate with your name.<br> To get your certificate, please enter the name you used for registration in the field below and click "Enter". Once generated, you can download your certificate instantly. <br>If you have any questions or run into issues, feel free to reach out to us on WhatsApp. <br>Thank you for participating, and have a wonderful year ahead!</div>',
+        '<div class="custom-text">This tool will verify your participation in the Synapse ML-Workshop 2024 and automatically generate a personalized certificate with your name.<br> To get your certificate, please enter the name you used for registration in the field below and click "Enter". Once generated, you can download your certificate instantly.<br>Thank you for participating, and have a wonderful year ahead!</div>',
         unsafe_allow_html=True
     )
     user_input = st.text_input("What is your full name?").strip().title()
